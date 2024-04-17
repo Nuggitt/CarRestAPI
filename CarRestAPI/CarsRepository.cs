@@ -42,34 +42,40 @@
             return cars.FirstOrDefault(c => c.Id == id);
         }
 
-        public void AddCar(Car car)
+        public Car AddCar(Car car)
         {
             car.ValidateId();
             car.ValidateBrand();
             car.ValidateModel();
             car.ValidateHorsePower();
             cars.Add(car);
+            return car;
         }
 
-        public void UpdateCar(Car car)
+        public Car UpdateCar(Car car)
         {
-            var existingCar = GetCarById(car.Id);
-            if (existingCar == null)
+            car.Validate();
+            Car? carToUpdate = GetCarById(car.Id);
+            if (carToUpdate == null)
             {
                 throw new ArgumentException("Car not found");
             }
-            cars.Remove(existingCar);
-            cars.Add(car);
+            carToUpdate.Id = car.Id;
+            carToUpdate.Brand = car.Brand;
+            carToUpdate.Model = car.Model;
+            carToUpdate.HorsePower = car.HorsePower;
+            return car;
         }
 
-        public void DeleteCar(int id)
+        public Car DeleteCar(int id)
         {
-            var car = GetCarById(id);
+            Car? car = GetCarById(id);
             if (car == null)
             {
                 throw new ArgumentException("Car not found");
             }
             cars.Remove(car);
+            return car;
         }
 
 
