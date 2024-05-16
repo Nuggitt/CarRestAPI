@@ -10,10 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton(new CarsRepository());
 // Assuming builder is an instance of HostBuilder or WebApplicationBuilder
 
-var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
-
 builder.Services.AddDbContext<CarsDbContext>(options =>
-    options.UseSqlServer(connectionString)
+    options.UseSqlServer(DBSecrets.ConnectionString)
 );
 
 builder.Services.AddSingleton<CarsRepositoryDB>();
