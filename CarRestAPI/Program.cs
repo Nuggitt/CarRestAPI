@@ -5,6 +5,15 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowAll",
+                              policy =>
+                              {
+                                  policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+
+                              });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton(new CarsRepository());
@@ -15,15 +24,7 @@ builder.Services.AddDbContext<CarsDbContext>(options =>
     options.UseSqlServer(DBSecrets.ConnectionString)
 );
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "AllowAll",
-                              policy =>
-                              {
-                                  policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 
-                              });
-});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,6 +42,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+app.UseCors("AllowAll");
 
 app.MapControllers();
 
