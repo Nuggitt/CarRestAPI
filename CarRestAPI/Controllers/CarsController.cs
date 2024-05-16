@@ -9,11 +9,12 @@ namespace CarRestAPI.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly CarsRepository _carsRepository = new CarsRepository();
+        //private readonly CarsRepository _carsRepository = new CarsRepository();
+        private readonly CarsRepositoryDB _carsRepository;
 
-        public CarsController(CarsRepository carsRepository)
+        public CarsController(CarsRepositoryDB carsRepositoryDB)
         {
-            _carsRepository = carsRepository;
+            _carsRepository = carsRepositoryDB;
         }
 
         // GET: api/<CarsController>
@@ -73,7 +74,7 @@ namespace CarRestAPI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult <Car?> Put(int id, [FromBody] Car car)
+        public ActionResult<Car?> Put(int id, [FromBody] Car car)
         {
             try
             {
