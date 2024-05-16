@@ -1,4 +1,6 @@
 using CarRestAPI;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +8,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton(new CarsRepository());
+// Assuming builder is an instance of HostBuilder or WebApplicationBuilder
+
+var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
+
+builder.Services.AddDbContext<CarsDbContext>(options =>
+    options.UseSqlServer(connectionString)
+);
+
+builder.Services.AddSingleton<CarsRepositoryDB>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 
