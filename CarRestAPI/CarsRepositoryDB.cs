@@ -1,4 +1,6 @@
-﻿namespace CarRestAPI
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace CarRestAPI
 {
     public class CarsRepositoryDB
     {
@@ -57,6 +59,12 @@
             carsDbContext.Cars.Remove(car);
             carsDbContext.SaveChanges();
             return car;
+        }
+
+        public Car DeleteAllCars()
+        {
+            carsDbContext.Database.ExecuteSqlRaw("TRUNCATE TABLE dbo.Cars");
+            return new Car();
         }
 
 
