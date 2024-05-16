@@ -15,6 +15,15 @@ builder.Services.AddDbContext<CarsDbContext>(options =>
     options.UseSqlServer(DBSecrets.ConnectionString)
 );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowAll",
+                              policy =>
+                              {
+                                  policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+
+                              });
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
