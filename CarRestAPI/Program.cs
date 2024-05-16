@@ -8,13 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton(new CarsRepository());
+builder.Services.AddScoped<CarsRepositoryDB>();
 // Assuming builder is an instance of HostBuilder or WebApplicationBuilder
 
 builder.Services.AddDbContext<CarsDbContext>(options =>
     options.UseSqlServer(DBSecrets.ConnectionString)
 );
 
-builder.Services.AddSingleton<CarsRepositoryDB>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
