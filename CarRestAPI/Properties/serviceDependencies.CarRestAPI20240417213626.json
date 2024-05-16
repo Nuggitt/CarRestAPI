@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "apis1": {
+      "apiEndpoint": "https://pokemonapiapi.azure-api.net/",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/PokemonAPIapi/apis/PokemonAPI",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/CarRestAPI20240417213626/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsmyStudioDB_F59C0186C8",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/myzealandstudioserver/databases/mystudioDB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:myStudioDB",
+      "dynamicId": null
+    }
+  }
+}
